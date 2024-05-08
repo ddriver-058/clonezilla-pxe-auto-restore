@@ -1,0 +1,5 @@
+label Clonezilla-live
+MENU LABEL Clonezilla Live (Ramdisk)
+KERNEL vmlinuz
+APPEND initrd=initrd.img boot=live username=user union=overlay components noswap noprompt vga=788 keyboard-layouts=us locales=en_US.UTF-8 ocs_live_run="ocs-live-restore" ocs_prerun="mkdir /samba" ocs_prerun1="dhclient" ocs_prerun2="mount.cifs //<SAMBA SERVER IP>/images /home/partimag -o guest" ocs_prerun3="/home/partimag/getAndRunOcsSrCall.sh" ocs_overwrite_postaction="poweroff-on-restoredisk" ocs_live_batch=yes fetch=tftp://<TFTP SERVER IP>/filesystem.squashfs
+DEFAULT Clonezilla-live

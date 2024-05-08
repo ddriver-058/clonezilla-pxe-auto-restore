@@ -1,0 +1,8 @@
+Populate the image directory with a saved Clonezilla image.
+https://clonezilla.org/show-live-doc-content.php?topic=clonezilla-live/doc/01_Save_disk_image
+
+This folder should contain files like:
+blkdev.list    dmraid.table      Info-lspci.txt        lvm_logv.list            sda2.ext4-ptcl-img.gz.aa sda-gpt.sgdisk        vg0-rootfs.ext4-ptcl-img.gz.aa
+blkid.list     Info-dmi.txt      Info-OS-prober.txt    lvm_vg0.conf             sda-chs.sf               sda-mbr
+clonezilla-img Info-img-id.txt   Info-packages.txt     lvm_vg_dev.list          sda-gpt-1st              sda-pt.parted
+

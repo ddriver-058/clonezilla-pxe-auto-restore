@@ -1,0 +1,14 @@
+# Looks up the ocs-sr command based on the mac address
+# For each element, supply list of applicable MAC addresses, then adjust command to point to your image
+macToImageDir:
+  
+  - mac: 
+      - "00:00:00:00:00:00"
+      - "ff:ff:ff:ff:ff:ff"
+    # Restore image: https://clonezilla.org/fine-print-live-doc.php?path=./clonezilla-live/doc/98_ocs_related_command_manpages/01-ocs-sr.doc
+    command: "ocs-sr -g auto -e1 auto -e2 -r -j2 -p true --batch restoredisk my-img-1 sda"
+
+  # server
+  - mac: 
+      - "aa:bb:cc:dd:ee:ff"
+    command: "ocs-sr -g auto -e1 auto -e2 -r -j2 -p true --batch restoredisk my-img-2 sda"

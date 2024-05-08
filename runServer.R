@@ -1,0 +1,1 @@
+library(plumber); plumber::plumb(file='/home/ddriver/repo/api.r')$run(host = '0.0.0.0', port = 8080)

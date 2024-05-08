@@ -1,0 +1,46 @@
+version: '3'
+services:
+  # DHCPD server that forwards clients to next-server (our PXE TFTP)
+  dhcpd:
+    image: networkboot/dhcpd
+    network_mode: host
+    volumes:
+      - "./clonezilla-pxe/data:/data"
+    command: eno1
+    init: true
+  
+  # TFTP server for the boot files
+  tftp:
+    image: pghalliday/tftp
+    container_name: tftp
+    network_mode: host
+    ports:
+      - "69:69/udp"
+    volumes:
+      - "./clonezilla-pxe/tftpboot/nbi_img:/var/tftpboot"
+  
+  # HTTP server for MAC address restore command lookup
+  rstudio-api:
+    build:
+      context: .
+    ports:
+      - "8787:8787"
+      - "8080:8080"
+    volumes:
+      - ".:/home/ddriver/repo"
+    user: "0"
+    command: Rscript /home/ddriver/repo/runServer.R
+    stdin_open: true
+    tty: true
+
+  # Serves boot images. These will be referenced in the ocs-sr command specified in api.yaml.
+  samba-server:
+    image: dperson/samba
+    ports:
+      - "139:139"
+      - "445:445"
+    volumes:
+      - "./image-samba/images:/mount"
+    command: "-s 'images;/mount;yes;no;yes;all;none;;Clonezilla Images'"
+    stdin_open: true
+    tty: true
